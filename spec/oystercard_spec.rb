@@ -16,6 +16,12 @@ describe Oystercard do
     oyster = Oystercard.new
     amount = 10
     9.times { oyster.topup(amount) }
-    expect { oyster.topup(amount) }.to raise_error 'Over limit'
+    expect { oyster.topup(amount) }.to raise_error 'Over limit of £90'
+  end
+  it 'deducts a fare from the oyster balance' do
+    oyster = Oystercard.new
+    amount = 10
+    9.times { oyster.topup(amount) }
+    expect {oyster.deduct}.to change {:balance}.from(:balance).to(:balance - fare)
   end
 end
