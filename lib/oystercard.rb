@@ -10,4 +10,8 @@ MAXBALANCE = 90
     fail "Over limit of £#{MAXBALANCE}" unless @balance < MAXBALANCE
     @balance += amount
   end
+
+  def deduct(fare)
+    @balance -= fare
+  end
 end

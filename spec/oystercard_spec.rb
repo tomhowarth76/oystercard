@@ -22,6 +22,12 @@ describe Oystercard do
     oyster = Oystercard.new
     amount = 10
     9.times { oyster.topup(amount) }
-    expect {oyster.deduct}.to change {:balance}.from(:balance).to(:balance - fare)
+    fare = 10
+    expect(oyster.deduct(fare)).to eq(80)
+  end
+
+  it 'touches in' do
+    oyster = Oystercard.new
+    expect(oyster.touch_in).to eq(true)
   end
 end
