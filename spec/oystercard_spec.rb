@@ -26,8 +26,25 @@ describe Oystercard do
     expect(oyster.deduct(fare)).to eq(80)
   end
 
-  it 'touches in' do
+  it 'touches in if over minimum fare' do
     oyster = Oystercard.new
-    expect(oyster.touch_in).to eq(true)
+    oyster.topup(10)
+    expect(oyster.touch_in).to be(true)
   end
+
+  it 'touches out' do
+    oyster = Oystercard.new
+    expect(oyster.touch_out).to be(false)
+  end
+  it 'knows it is in journey' do
+     oyster = Oystercard.new
+      oyster.topup(10)
+      oyster.touch_in
+     expect(oyster.in_journey?).to be(true)
+  end
+  it 'raises an error if touched in below minimum fare' do
+    oyster = Oystercard.new
+    expect { oyster.touch_in }.to raise_error 'Balance must be over £1'
+  end
+  it 'reduces the balance by the minimum '
 end
